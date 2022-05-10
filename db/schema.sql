@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS listings;
 
 CREATE TABLE listings(
+  uuid TEXT NOT NULL primary key,
   property_transaction_id TEXT NOT NULL,
   address_street TEXT NULL,
   address_street_number TEXT NULL,

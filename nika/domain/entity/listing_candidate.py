@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import uuid
 
 @dataclass(frozen=True)
 class Address:
@@ -11,4 +12,7 @@ class Address:
 class ListingCandidate:
     property_transaction_id: str
     address: Address
+    uuid: uuid = None
 
+    def __post_init__(self):
+        if self.uuid is None: object.__setattr__(self, 'uuid', uuid.uuid4())

@@ -1,4 +1,5 @@
 import sqlite3
+import uuid
 from ...domain.repository.listing_repository import *
 from ...domain.entity.listing_candidate import *
 
@@ -20,12 +21,13 @@ class SqliteListingRepository(ListingRepository):
         db = sqlite3.connect(self.db_path)
         db.execute(
             """insert into listings(
-                property_transaction_id, is_candidate,
+                uuid, property_transaction_id, is_candidate,
                 address_street, address_street_number,
                 address_city, address_zip_code
-            ) values (?,?,?,?,?,?)
+            ) values (?,?,?,?,?,?,?)
             """,
             [
+                str(candidate.uuid),
                 candidate.property_transaction_id,
                 True,
                 candidate.address.street,
@@ -39,6 +41,7 @@ class SqliteListingRepository(ListingRepository):
 
     def __row_to_candidate(self, row):
         return ListingCandidate(
+            uuid = uuid.UUID(row["uuid"]),
             property_transaction_id = row["property_transaction_id"],
             address= Address(
                 street= row["address_street"],
