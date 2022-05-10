@@ -21,10 +21,6 @@ Init an empty db:
 ```console
 # flask init-db
 ```
-or
-```console
-# python db/init_db.py
-```
 
 Optionally fill db with some fixture data:
 

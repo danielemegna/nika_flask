@@ -1,15 +1,15 @@
 from nika.ports.repository.sqlite_listing_repository import *
 
-def run():
-    print("Writing some fixture data into db ...")
+def run(sqlite_filepath):
+    print(f'Writing some fixture data into {sqlite_filepath} db file ...')
 
-    listing_repository = SqliteListingRepository("db/db.sqlite")
+    listing_repository = SqliteListingRepository(sqlite_filepath)
     __listing_candidates(listing_repository)
 
     print('Done.')
 
 def __listing_candidates(listing_repository):
-    print("ListingCandidate ...")
+    print('ListingCandidate ...')
     candidates = [
         ListingCandidate(
             property_transaction_id="22_12345",
@@ -32,6 +32,3 @@ def __listing_candidates(listing_repository):
     ]
     for c in candidates:
         listing_repository.add_candidate(c)
-
-if __name__ == '__main__':
-    run()
