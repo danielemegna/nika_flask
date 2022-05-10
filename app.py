@@ -4,6 +4,8 @@ from nika.domain.usecase.get_all_listing_candidates import *
 from nika.domain.usecase.add_listing_candidate import *
 from nika.ports.repository.sqlite_listing_repository import *
 from nika.domain.entity.listing_candidate import *
+import db.init_db
+import db.write_fixtures
 
 app = Flask(__name__)
 
@@ -23,6 +25,14 @@ def create_listing_candidate():
     usecase = AddListingCandidate(__build_listing_repository())
     candidates = usecase.run(candidate)
     return { "result": "success" }
+
+@app.cli.command("init-db")
+def init_db_command():
+    db.init_db.run()
+
+@app.cli.command("write-fixtures")
+def write_fixtures_command():
+    db.write_fixtures.run()
 
 def __serialize_candidates(candidates):
     return jsonify(candidates)
