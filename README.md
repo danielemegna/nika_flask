@@ -26,6 +26,12 @@ or
 # python db/init_db.py
 ```
 
+Optionally fill db with some fixture data:
+
+```console
+# flask write-fixtures
+```
+
 Start the application:
 ```console
 # FLASK_ENV=development flask run -h 0.0.0.0
