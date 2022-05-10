@@ -13,7 +13,7 @@ Setup a temporary dev docker container:
 
 ```console
 $ docker run --rm -itp 5000:5000 -v $PWD:/app -w /app python:3.10.4-alpine sh
-# pip install Flask==2.1.2
+# pip install -r requirements/dev.txt
 ```
 
 Init an empty db:
@@ -31,4 +31,22 @@ Optionally fill db with some fixture data:
 Start the application:
 ```console
 # FLASK_ENV=development flask run -h 0.0.0.0
+```
+
+#### E2E tests
+
+Start a test instance in a separated tab:
+
+```console
+# FLASK_ENV=test flask init-db
+# FLASK_ENV=test flask write-fixtures
+# FLASK_ENV=test FLASK_DEBUG=1 flask run
+```
+
+or via `start-test-instance.sh` script
+
+Run tests via pytest:
+
+```console
+# pytest -v
 ```
