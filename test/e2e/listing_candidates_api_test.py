@@ -1,3 +1,4 @@
+import uuid
 import requests
 
 class TestListingCandidatesApi:
@@ -9,9 +10,11 @@ class TestListingCandidatesApi:
     assert response.status_code == requests.codes.ok
     response_body = response.json()
     assert len(response_body) == 2
+    assert is_valid_uuid4(response_body[0]["uuid"]), "Invalid uuid in returned body"
     assert len(response_body[0]["property_transaction_id"]) > 0
     assert len(response_body[0]["address"]["city"]) > 0
     assert len(response_body[0]["address"]["street"]) > 0
+    assert is_valid_uuid4(response_body[1]["uuid"]), "Invalid uuid in returned body"
     assert len(response_body[1]["property_transaction_id"]) > 0
     assert len(response_body[1]["address"]["street_number"]) > 0
     assert len(response_body[1]["address"]["zip_code"]) > 0
@@ -20,3 +23,9 @@ class TestListingCandidatesApi:
     response = requests.post(self.ROUTE_UNDER_TEST)
     assert response.status_code == requests.codes.method_not_allowed
 
+def is_valid_uuid4(value):
+  try:
+      uuid.UUID(value, version=4)
+      return True
+  except ValueError:
+      return False
