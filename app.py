@@ -20,13 +20,6 @@ def get_all_listing_candidates():
     candidates = usecase.run()
     return __serialize_candidates(candidates)
 
-@app.route("/listings/candidates/create")
-def create_listing_candidate():
-    candidate = None
-    usecase = AddListingCandidate(__build_listing_repository())
-    candidates = usecase.run(candidate)
-    return { "result": "success" }
-
 @app.cli.command("init-db")
 def init_db_command():
     db.init_db.run(__sqlite_filepath())
