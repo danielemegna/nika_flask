@@ -20,6 +20,13 @@ def get_all_listing_candidates():
     candidates = usecase.run()
     return __serialize_candidates(candidates)
 
+@app.route("/listings/candidates/<uuid:id>/create-draft", methods=['POST'])
+def create_listing_draft_from_candidate(id):
+    return ({
+        "error_code": "LISTING_CANDIDATE_NOT_FOUND",
+        "error_message": f"Cannot find listing candidate with id {id}"
+    }, 404)
+
 @app.cli.command("init-db")
 def init_db_command():
     db.init_db.run(__sqlite_filepath())
