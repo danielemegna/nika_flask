@@ -10,14 +10,16 @@ class TestListingCandidatesApi:
     assert response.status_code == requests.codes.ok
     response_body = response.json()
     assert len(response_body) == 2
-    assert is_valid_uuid4(response_body[0]["uuid"]), "Invalid uuid in returned body"
-    assert len(response_body[0]["property_transaction_id"]) > 0
-    assert len(response_body[0]["address"]["city"]) > 0
-    assert len(response_body[0]["address"]["street"]) > 0
-    assert is_valid_uuid4(response_body[1]["uuid"]), "Invalid uuid in returned body"
-    assert len(response_body[1]["property_transaction_id"]) > 0
-    assert len(response_body[1]["address"]["street_number"]) > 0
-    assert len(response_body[1]["address"]["zip_code"]) > 0
+    first = response_body[0]
+    assert is_valid_uuid4(first["uuid"]), "Invalid uuid in returned body"
+    assert len(first["property_transaction_id"]) > 0
+    assert len(first["address"]["city"]) > 0
+    assert len(first["address"]["street"]) > 0
+    second = response_body[1]
+    assert is_valid_uuid4(second["uuid"]), "Invalid uuid in returned body"
+    assert len(second["property_transaction_id"]) > 0
+    assert len(second["address"]["street_number"]) > 0
+    assert len(second["address"]["zip_code"]) > 0
 
   def test_post_method_not_allowed(self):
     response = requests.post(self.ROUTE_UNDER_TEST)
