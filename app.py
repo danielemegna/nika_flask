@@ -1,5 +1,4 @@
 from flask import Flask, jsonify
-from dataclasses import dataclass
 from nika.domain.usecase.get_all_listing_candidates import *
 from nika.domain.usecase.add_listing_candidate import *
 from nika.ports.repository.sqlite_listing_repository import *

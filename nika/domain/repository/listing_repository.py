@@ -2,10 +2,10 @@ from ..entity.listing_candidate import *
 
 class ListingRepository:
 
-    def get_candidates(self):
+    def get_candidates(self) -> list[ListingCandidate]:
         raise NotImplementedError("You're calling an interface method!")
 
-    def add_candidate(self, candidate):
+    def add_candidate(self, candidate: ListingCandidate) -> None:
         raise NotImplementedError("You're calling an interface method!")
 
 ########################################################################
