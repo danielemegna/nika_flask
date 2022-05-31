@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from nika.domain.usecase.create_draft_from_candidate import *
 from nika.domain.usecase.get_all_listing_candidates import *
 from nika.domain.usecase.add_listing_candidate import *
 from nika.ports.repository.sqlite_listing_repository import *
@@ -21,6 +22,9 @@ def get_all_listing_candidates():
 
 @app.route("/listings/candidates/<uuid:id>/create-draft", methods=['POST'])
 def create_listing_draft_from_candidate(id):
+    usecase = CreateDraftFromCandidate(__build_listing_repository())
+    listing_id = usecase.run(id)
+    #return ({ "id": listing_id }, 201)
     return ({
         "error_code": "LISTING_CANDIDATE_NOT_FOUND",
         "error_message": f"Cannot find listing candidate with id {id}"

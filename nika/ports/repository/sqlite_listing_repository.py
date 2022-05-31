@@ -17,6 +17,9 @@ class SqliteListingRepository(ListingRepository):
         db.close()
         return listings
 
+    def get_candidate(self, id: UUID) -> ListingCandidate:
+        return None
+
     def add_candidate(self, candidate):
         db = sqlite3.connect(self.db_path)
         db.execute(

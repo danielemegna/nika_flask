@@ -10,12 +10,11 @@ class TestListingCandidatesApi:
     assert response.status_code == requests.codes.ok
     response_body = response.json()
     assert len(response_body) == 2
-    first = response_body[0]
+    [first, second] = response_body
     assert is_valid_uuid4(first["uuid"]), "Invalid uuid in returned body"
     assert len(first["property_transaction_id"]) > 0
     assert len(first["address"]["city"]) > 0
     assert len(first["address"]["street"]) > 0
-    second = response_body[1]
     assert is_valid_uuid4(second["uuid"]), "Invalid uuid in returned body"
     assert len(second["property_transaction_id"]) > 0
     assert len(second["address"]["street_number"]) > 0
