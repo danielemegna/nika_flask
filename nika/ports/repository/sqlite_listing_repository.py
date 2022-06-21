@@ -16,10 +16,9 @@ class SqliteListingRepository(ListingRepository):
             where is_candidate = true
             order by property_transaction_id
         """
-        rows = db.execute(query)
-        listings = [self.__row_to_candidate(row) for row in rows]
+        rows = db.execute(query).fetchall()
         db.close()
-        return listings
+        return [self.__row_to_candidate(row) for row in rows]
 
     def get_candidate(self, id: UUID) -> ListingCandidate:
         return None
