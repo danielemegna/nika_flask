@@ -14,21 +14,21 @@ def __listing_candidates(listing_repository):
     print('Writing listing candidates ...')
     candidates = [
         ListingCandidate(
-            property_transaction_id="22_12345",
-            address=Address(
-                street="Via Cellini",
-                street_number="16",
-                city="Corsico",
-                zip_code="20094"
-            )
-        ),
-        ListingCandidate(
             property_transaction_id="22_42345",
             address=Address(
                 street="Via Boccaccio",
                 street_number="13",
                 city="Trezzano sul Naviglio",
                 zip_code="20106"
+            )
+        ),
+        ListingCandidate(
+            property_transaction_id="22_12345",
+            address=Address(
+                street="Via Cellini",
+                street_number="16",
+                city="Corsico",
+                zip_code="20094"
             )
         )
     ]

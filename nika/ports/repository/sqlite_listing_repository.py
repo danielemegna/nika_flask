@@ -11,7 +11,11 @@ class SqliteListingRepository(ListingRepository):
     def get_candidates(self):
         db = sqlite3.connect(self.db_path)
         db.row_factory = sqlite3.Row
-        query = "select * from listings where is_candidate = true"
+        query = """
+            select * from listings
+            where is_candidate = true
+            order by property_transaction_id
+        """
         rows = db.execute(query)
         listings = [self.__row_to_candidate(row) for row in rows]
         db.close()

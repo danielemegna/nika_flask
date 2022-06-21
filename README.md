@@ -33,6 +33,23 @@ Start the application:
 # FLASK_ENV=development flask run -h 0.0.0.0
 ```
 
+#### Start tests
+
+Run unit tests with:
+
+```console
+# PYTHONPATH=. pytest -v test/unit
+```
+
+For integration tests a ready db with fixtures is needed:
+```
+# FLASK_ENV=test flask init-db
+# FLASK_ENV=test flask write-fixtures
+# PYTHONPATH=. pytest -v test/integration
+```
+
+> PYTHONPATH value is needed to include source modules
+
 #### E2E tests
 
 Start a test instance in a separated tab:
@@ -48,5 +65,5 @@ or via `start-test-instance.sh` script
 Run tests via pytest:
 
 ```console
-# pytest -v
+# pytest -v test/e2e
 ```
