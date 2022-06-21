@@ -23,8 +23,13 @@ def get_all_listing_candidates():
 @app.route("/listings/candidates/<uuid:id>/create-draft", methods=['POST'])
 def create_listing_draft_from_candidate(id):
     usecase = CreateDraftFromCandidate(__build_listing_repository())
-    listing_id = usecase.run(id)
-    #return ({ "id": listing_id }, 201)
+    try:
+        listing_id = usecase.run(id)
+        #return ({ "id": listing_id }, 201)
+        pass
+    except ListingNotFoundError:
+        pass
+
     return ({
         "error_code": "LISTING_CANDIDATE_NOT_FOUND",
         "error_message": f"Cannot find listing candidate with id {id}"

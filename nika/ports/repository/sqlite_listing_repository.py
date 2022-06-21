@@ -26,6 +26,7 @@ class SqliteListingRepository(ListingRepository):
         query = "select * from listings where uuid = ?"
         row = db.execute(query, [str(id)]).fetchone()
         db.close()
+        if(row == None): raise ListingNotFoundError()
         return self.__row_to_candidate(row)
 
     def add_candidate(self, candidate):

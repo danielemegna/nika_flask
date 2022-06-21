@@ -1,5 +1,5 @@
 from pprint import pprint
-import random
+import pytest
 from nika.domain.entity.listing_candidate import *
 from nika.ports.repository.sqlite_listing_repository import *
 
@@ -33,3 +33,8 @@ class TestSqliteListingRepository:
     assert c.address.city == "Corsico"
     assert c.address.street == "Via Cellini"
     assert c.address.zip_code == "20094"
+
+  def test_get_unexisting_candidate_by_id(self):
+    repository = SqliteListingRepository('db/test.sqlite')
+    with pytest.raises(ListingNotFoundError):
+      repository.get_candidate(uuid.uuid4())

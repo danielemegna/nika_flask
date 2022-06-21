@@ -12,6 +12,9 @@ class ListingRepository:
     def add_candidate(self, candidate: ListingCandidate) -> None:
         raise NotImplementedError("You're calling an interface method!")
 
+class ListingNotFoundError(Exception):
+    pass
+
 ########################################################################
 
 class DummyListingRepository(ListingRepository):
