@@ -16,15 +16,10 @@ $ docker run --rm -itp 5000:5000 -v $PWD:/app -w /app python:3.10.4-alpine sh
 # pip install -r requirements/dev.txt
 ```
 
-Init an empty db:
+Init an empty db and optionally fill it with fixtures:
 
 ```console
 # flask init-db
-```
-
-Optionally fill db with some fixture data:
-
-```console
 # flask write-fixtures
 ```
 
@@ -42,9 +37,8 @@ Run unit tests with:
 ```
 
 For integration tests a ready db with fixtures is needed:
-```
-# FLASK_ENV=test flask init-db
-# FLASK_ENV=test flask write-fixtures
+```console
+# scripts/setup-test-db.sh
 # PYTHONPATH=. pytest -v test/integration
 ```
 
@@ -55,12 +49,8 @@ For integration tests a ready db with fixtures is needed:
 Start a test instance in a separated tab:
 
 ```console
-# FLASK_ENV=test flask init-db
-# FLASK_ENV=test flask write-fixtures
-# FLASK_ENV=test FLASK_DEBUG=1 flask run
+# scripts/start-test-instance.sh
 ```
-
-or via `start-test-instance.sh` script
 
 Run tests via pytest:
 
