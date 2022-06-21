@@ -1,4 +1,3 @@
-from pprint import pprint
 import pytest
 from nika.domain.entity.listing_candidate import *
 from nika.ports.repository.sqlite_listing_repository import *
