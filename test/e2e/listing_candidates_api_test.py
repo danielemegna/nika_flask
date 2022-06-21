@@ -26,7 +26,7 @@ class TestListingCandidatesApi:
 
 def is_valid_uuid4(value):
   try:
-      uuid.UUID(value, version=4)
-      return True
+    uuid.UUID(value, version=4)
+    return True
   except ValueError:
-      return False
+    return False
