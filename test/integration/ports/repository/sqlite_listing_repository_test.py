@@ -1,4 +1,5 @@
-import uuid
+from pprint import pprint
+import random
 from nika.domain.entity.listing_candidate import *
 from nika.ports.repository.sqlite_listing_repository import *
 
@@ -19,3 +20,16 @@ class TestSqliteListingRepository:
     assert second.uuid.version == 4
     assert second.property_transaction_id == "22_42345"
     assert second.address.street == "Via Boccaccio"
+
+  def test_get_candidate_by_id(self):
+    repository = SqliteListingRepository('db/test.sqlite')
+    uuid = repository.get_candidates()[0].uuid
+    
+    c = repository.get_candidate(uuid)
+
+    assert isinstance(c, ListingCandidate), "Invalid instance type"
+    assert c.uuid == uuid
+    assert c.property_transaction_id == "22_12345"
+    assert c.address.city == "Corsico"
+    assert c.address.street == "Via Cellini"
+    assert c.address.zip_code == "20094"

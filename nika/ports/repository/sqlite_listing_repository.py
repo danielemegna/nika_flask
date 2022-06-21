@@ -21,7 +21,12 @@ class SqliteListingRepository(ListingRepository):
         return [self.__row_to_candidate(row) for row in rows]
 
     def get_candidate(self, id: UUID) -> ListingCandidate:
-        return None
+        db = sqlite3.connect(self.db_path)
+        db.row_factory = sqlite3.Row
+        query = "select * from listings where uuid = ?"
+        row = db.execute(query, [str(id)]).fetchone()
+        db.close()
+        return self.__row_to_candidate(row)
 
     def add_candidate(self, candidate):
         db = sqlite3.connect(self.db_path)
